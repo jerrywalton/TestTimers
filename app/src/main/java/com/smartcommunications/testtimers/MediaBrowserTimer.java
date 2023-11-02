@@ -11,7 +11,7 @@ public class MediaBrowserTimer {
 
     private Date lastTimeout = new Date();
 
-    private long timerExpires = 10000L;
+    private long defaultTimeout = 10000L;
 
     private String name;
 
@@ -28,13 +28,13 @@ public class MediaBrowserTimer {
         long diffInMillies = Math.abs(timeNow - lasTimeoutTime);
         System.out.println("timeNow: " + timeNow + " - lasTimeoutTime: " + lasTimeoutTime + " ->  diffInMillies: " + diffInMillies);
 
-        long diffExpiresTime = Math.abs(timerExpires - diffInMillies);
-        long calcTimeout = Math.min(diffExpiresTime, timerExpires);
-        System.out.println("diffExpiresTime: " + diffExpiresTime + " timerExpires: " + timerExpires + " -> calcTimeout: " + calcTimeout);
+        long diffExpiresTime = Math.abs(defaultTimeout - diffInMillies);
+        long calcTimeout = Math.min(diffExpiresTime, defaultTimeout);
+        System.out.println("diffExpiresTime: " + diffExpiresTime + " defaultTimeout: " + defaultTimeout + " -> calcTimeout: " + calcTimeout);
         return calcTimeout;
     }
     public void initTimer(long initialTimeout) {
-        long timeout = initialTimeout > 0 ? initialTimeout : timerExpires;
+        long timeout = initialTimeout > 0 ? initialTimeout : defaultTimeout;
         System.out.println(name + "initTimer with timeout: " + timeout);
         timer = new Timer();
         timer.schedule(
@@ -69,7 +69,7 @@ public class MediaBrowserTimer {
                             timerTimeout();
                         }
                     },
-                    timerExpires);
+                    defaultTimeout);
         }
     }
 

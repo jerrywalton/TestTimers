@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import androidx.core.view.WindowCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
     private final MediaBrowserTimer timer = new MediaBrowserTimer(activityName);
 
+    private MyViewModel myViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        myViewModel = new ViewModelProvider(this).get(MyViewModel.class);
 
     }
 
@@ -96,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(activityName  + "onResume");
         // init the timer
         timer.initTimer(0);
+        myViewModel.test(activityName);
     }
 
     @Override
@@ -104,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(activityName  + "onPause");
         // pause the timer
         timer.pauseTimer();
+        myViewModel.test(activityName);
+
     }
 
     @Override
