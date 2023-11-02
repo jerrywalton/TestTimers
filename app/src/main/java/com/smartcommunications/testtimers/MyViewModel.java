@@ -8,7 +8,7 @@ public class MyViewModel extends ViewModel {
 
     private MediaBrowserTimer mediaBrowserTimer;
 
-    private String name = "MyViewModel";
+    private String name = "MyViewModel: ";
 
     public MyViewModel() {
         super();
